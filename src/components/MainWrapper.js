@@ -1,8 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import ExercisesForm from "./ExercisesForm";
 import ListedExercises from "./ListedExercises"
 
 const MainWrapper = () => {
+
+ 
 
   const exerciseData = [{
     exercise: 'Bicep Curl',
@@ -13,12 +15,33 @@ const MainWrapper = () => {
   }]
 
   const [passedData, setPassedData] = useState(exerciseData);
+
   
   const exerciseDataHandler = (enteredExerciseData) => {
       setPassedData(previousExercises => {
         return [enteredExerciseData, ...passedData]
       });
     }
+    
+    const deleteSetter = (enteredExerciseData) => {
+       setPassedData(previousExercises => {
+         return[enteredExerciseData]
+      })
+
+
+      console.log(passedData)
+    }
+
+    let newData;
+    const deleteHandler = (deletedExercise) => {
+      newData = passedData.filter(previousExercises => deletedExercise !== previousExercises.exercise
+       
+        )
+      
+      deleteSetter(newData);
+      
+      };
+    
    
   
   return (
@@ -31,7 +54,7 @@ const MainWrapper = () => {
           
           <ExercisesForm onSubmitFormProp={exerciseDataHandler}/>
 
-          <ListedExercises exerciseData={passedData}/>
+          <ListedExercises exerciseData={passedData} handleDeletion={deleteHandler}/>
           <div className="card-actions justify-end"></div>
         </div>
       </div>
