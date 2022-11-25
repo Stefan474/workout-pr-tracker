@@ -1,44 +1,69 @@
 import React, { useState } from "react";
 
-const ExercisesForm = () => {
+const ExercisesForm = (props) => {
   const [isActive, setIsActive] = useState(false);
+  const [enteredExercise, setExercise] = useState('');
+  const [enteredWeight, setWeight] = useState('');
+  const [enteredSets, setSets] = useState('');
+  const [enteredReps, setReps] = useState('');
+  const [enteredMessage, setMessage] = useState("");
 
   const formHandlerTrue = () => {
     setIsActive(true);
   };
 
   const formHandlerFalse = () => {
+
     setIsActive(false);
+    setExercise('');
+    setWeight('');
+    setSets('');
+    setReps('');
+    setMessage('');
   };
 
-  const submitFormHandler = (event) => {
-    event.preventDefault();
-    setIsActive(false);
+  const submitFormHandler = (e) => {
+    const exerciseData = "";
+    if (enteredExercise !== '' && enteredWeight !== '' && enteredSets !== '' && enteredReps !== ''){
+    e.preventDefault();
+
+    const exerciseData = {
+      exercise: enteredExercise,
+      weight: enteredWeight,
+      sets: enteredSets,
+      reps: enteredReps,
+      message: enteredMessage
+    }
+    props.onSubmitFormProp(exerciseData);
+
+    formHandlerFalse();
+  }
+    
   };
 
   const exerciseChangeHandler = (e) => {
-    const exercise = e.target.value;
+    setExercise(e.target.value);
   };
   const weightChangeHandler = (e) => {
-    const weight = e.target.value;
+    setWeight(e.target.value);
   };
   const setsChangeHandler = (e) => {
-    const sets = e.target.value;
+    setSets(e.target.value);
   };
   const repsChangeHandler = (e) => {
-    const reps = e.target.value;
+    setReps(e.target.value);
   };
   const messageChangeHandler = (e) => {
-    const message = e.target.value;
+    setMessage(e.target.value);
   };
 
   let formContent = (
     <div>
-      <h2 className="text-white text-3xl mb-3">Push records every day!</h2>
+      <h2 className="text-white text-2xl mb-5">Made by <span className="text-cyan-100	">Stefan</span> with React and Tailwind!</h2>
       <button className="btn btn-primary mb-5" onClick={formHandlerTrue}>
         Add a new exercise!
       </button>
-      ;<p className="text-white mb-6">Here are your PRs to beat, king:</p>
+      ;<p className="text-white mb-1 text-lg">Here are your PRs to beat, king:</p>
     </div>
   );
 
@@ -83,7 +108,7 @@ const ExercisesForm = () => {
           <br></br>
           <input
             type="text"
-            placeholder="Any message to yourself king? Notes?"
+            placeholder="Notes for yourself? (30 ch max)"
             className="input input-bordered input-info w-full max-w-xs mb-2"
             onChange={messageChangeHandler}
             required
@@ -95,7 +120,7 @@ const ExercisesForm = () => {
           >
             Cancel
           </button>
-          <button type="submit" className="btn btn-primary mx-1 mt-3">
+          <button type="submit" onClick={submitFormHandler} className="btn btn-primary mx-1 mt-3">
             Submit
           </button>
         </form>
