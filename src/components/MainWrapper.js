@@ -22,7 +22,7 @@ const MainWrapper = () => {
         return [enteredExerciseData, ...passedData]
       });
     }
-    
+
     const deleteSetter = (enteredExerciseData) => {
        setPassedData(previousExercises => {
          return[enteredExerciseData]
@@ -46,8 +46,8 @@ const MainWrapper = () => {
   
   return (
     <div className="flex flex-row justify-center align-middle h-screen">
-      <div className="card glass w-9/12 text-center place-self-center shadow-xl overflow-y-scroll h-3/5 max-h-4/5}">
-        <div className="card-body">
+      <div className="card glass w-9/12 text-center place-self-center shadow-xl overflow-y-scroll h-4/6 max-h-4/5}">
+        <div className="card-body justify-center">
           <h1 className="card-title flex-col text-4xl mb-5 text-white">
             Workout PR Tracker!
           </h1>
