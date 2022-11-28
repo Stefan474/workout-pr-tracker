@@ -19,13 +19,13 @@ const MainWrapper = () => {
   
   const exerciseDataHandler = (enteredExerciseData) => {
       setPassedData(previousExercises => {
-        return [enteredExerciseData, ...passedData]
+        return [enteredExerciseData, ...previousExercises]
       });
     }
 
     const deleteSetter = (enteredExerciseData) => {
        setPassedData(previousExercises => {
-         return[enteredExerciseData]
+         return console.log(typeof(previousExercises))
       })
 
 
@@ -38,15 +38,15 @@ const MainWrapper = () => {
        
         )
       
-      deleteSetter(newData);
-      
+      deleteSetter(newData)
       };
-    
+      
+      
    
   
   return (
     <div className="flex flex-row justify-center align-middle h-screen">
-      <div className="card glass w-9/12 text-center place-self-center shadow-xl overflow-y-scroll h-4/6 max-h-4/5}">
+      <div className="card glass w-9/12 text-center place-self-center shadow-xl overflow-y-auto h-4/6 max-h-4/5}">
         <div className="card-body justify-center">
           <h1 className="card-title flex-col text-4xl mb-5 text-white">
             Workout PR Tracker!
@@ -55,6 +55,8 @@ const MainWrapper = () => {
           <ExercisesForm onSubmitFormProp={exerciseDataHandler}/>
 
           <ListedExercises exerciseData={passedData} handleDeletion={deleteHandler}/>
+
+          <button onClick={() => console.log(passedData)} className="btn"> Dugmad </button>
           <div className="card-actions justify-end"></div>
         </div>
       </div>
